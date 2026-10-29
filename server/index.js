@@ -18,6 +18,9 @@ app.use("/api/auth", authRoutes);
 
 app.use("/users", userRoutes);
 
+// course route
+app.use("/courses", require("./routes/courses"));
+
 // middleware
 app.get("/me", verifyToken, (req, res) => res.json(req.user));
 app.get("/admin-only", verifyToken, requireRole("admin"), (req, res) =>
