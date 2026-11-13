@@ -7,9 +7,9 @@ const router = express.Router();
 
 const login = async (req, res) => {
   try {
-    const { email, passwordHash } = req.body;
+    const { email, password } = req.body;
 
-    if (!email || !passwordHash) {
+    if (typeof email !== "string" || typeof password !== "string" || !email.trim() || !password) {
       return res.status(400).json({ message: "Email and password required" });
     }
 
@@ -18,7 +18,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const match = await bcrypt.compare(passwordHash, user.passwordHash);
+    const match = await bcrypt.compare(password, user.passwordHash);
     if (!match) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
