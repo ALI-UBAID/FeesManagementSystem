@@ -9,11 +9,16 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (typeof email !== "string" || typeof password !== "string" || !email.trim() || !password) {
+    if (
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !email.trim() ||
+      !password
+    ) {
       return res.status(400).json({ message: "Email and password required" });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.trim().toLowerCase() });
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
