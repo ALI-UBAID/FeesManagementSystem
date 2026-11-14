@@ -21,6 +21,9 @@ app.use("/users", userRoutes);
 // course route
 app.use("/courses", require("./routes/courses"));
 
+// student route
+app.use("/students", require("./routes/students"));
+
 // middleware
 app.get("/me", verifyToken, (req, res) => res.json(req.user));
 app.get("/admin-only", verifyToken, requireRole("admin"), (req, res) =>
