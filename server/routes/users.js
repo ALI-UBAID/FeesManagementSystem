@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
         .json({ message: "Name, email and password required" });
     }
 
-    if (role && !["admin", "user"].includes(role)) {
+    if (role && !["admin", "staff"].includes(role)) {
       return res.status(400).json({ message: "Invalid role" });
     }
 
